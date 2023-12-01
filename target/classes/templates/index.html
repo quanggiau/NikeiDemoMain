@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Employee Management System</title>
+
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+	
+</head>
+<body>
+
+	<div class="container my-2">
+	<h2 align="center">Search in Thymeleaf Template</h2>
+	<form th:action="@{/search}" method="get">
+
+		<table>
+			<tr>
+				<td>
+					<label>title</label>
+				</td>
+				<td>
+					<input type="text" name="title" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>nghành</label>
+				</td>
+				<td>
+					<input type="text" name="major" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>nội dung câu hỏi</label>
+				</td>
+				<td>
+					<input type="text" name="question" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>nội dung trả lời</label>
+				</td>
+				<td>
+					<input type="text" name="answer" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label>kết quả tạo</label>
+				</td>
+				<td>
+					<input type="text" name="result" th:value="${keyword}"  placeholder="Find by Owner Name & Shop Type" size="50" >
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2"><button type="submit" class="btn btn-info" style="text-align: center;" >Search</button></td>
+			</tr>
+		</table>
+	</form>
+	
+	<a th:href = "@{/showNewEmployeeForm}" class="btn btn-primary btn-sm mb-3"> Add New </a>
+	
+		<table border="1" class = "table table-striped table-responsive-md">
+			<thead>
+				<tr>
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=firstName&sortDir=' + ${reverseSortDir}}">
+							ID</a>
+					</th>
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=lastName&sortDir=' + ${reverseSortDir}}">
+							Title</a>
+					</th>
+					<th>
+					<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+							Major</a>
+					</th>
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+								CreatteBy</a>
+					</th>
+					<th>
+						<a th:href="@{'/page/' + ${currentPage} + '?sortField=email&sortDir=' + ${reverseSortDir}}">
+								CreatteAt</a>
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="employee : ${listEmployees}">
+					<td th:text="${employee.firstName}"></td>
+					<td th:text="${employee.lastName}"></td>
+					<td th:text="${employee.email}"></td>
+					<td th:text="${employee.email}"></td>
+					<td th:text="${employee.email}"></td>
+				</tr>
+			</tbody>
+		</table>
+		
+		</div>
+	</div>
+</body>
+</html>
