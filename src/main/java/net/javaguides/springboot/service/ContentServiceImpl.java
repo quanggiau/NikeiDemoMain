@@ -13,7 +13,9 @@ public class ContentServiceImpl implements ContentService{
     @Autowired
     private ContentRepository contentRepository;
 
-
+    public ContentServiceImpl(ContentRepository contentRepository){
+        this.contentRepository = contentRepository;
+    }
 
     @Override
     public List<Content> getAllContents() {

@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="en" xml:lang="en" xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>Nikkei Demo</title> 
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <h1 style="color: green;">Nikkei Demo</h1>
+    <table>
+        <thead th:each="content : ${ListContent}">
+            <tr>
+                <th>ID</th>
+                <th>123</th>
+            </tr>
+            <tr>
+                <th>Title:</th>
+                <th><input th:value="${content.answer}"></th>
+            </tr>
+            <tr>
+                <th>Ngành:</th>
+                <th><input th:value="${content.question}"></th>
+            </tr>
+            <tr>
+                <th>Số lượng tạo:</th>
+                <th><input type="number"></th>
+            </tr>
+            <tr>
+                <th>Số ký tự: </th>
+                <th> <input type="number"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="content : ${ListContent}">
+                <td>Câu hỏi 1:</td>
+                <td><input th:value="${content.id}"></td>
+                <td>Câu trả lời 1:</td>
+                <td><input th:value="${content.id}"></td>
+            </tr>
+            <tr th:each="content : ${ListContent}">
+                <td>Câu hỏi 2:</td>
+                <td><input th:value="${content.id}"></td>
+                <td>Câu trả lời 2:</td>
+                <td><input th:value="${content.id}"></td>
+            </tr>
+            <tr th:each="content : ${ListContent}">
+                <td>Câu hỏi 3:</td>
+                <td><input th:value="${content.id}"></td>
+                <td>Câu trả lời 3:</td>
+                <td th:text="${content.id}"></td>
+            </tr>
+
+        </tbody>
+    </table>
+    <button type="button">Lưu</button>
+    <button type="button">Tạo press release</button>
+</body>
+<!-- footer -->
+<footer><h2 style="color: green;">Thanks you</h2></footer>
+</html>
