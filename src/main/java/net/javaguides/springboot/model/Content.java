@@ -13,7 +13,7 @@ public class Content {
 	private long id;
 	
 	@Column(name = "id_service")
-	private String idService;
+	private long idService;
 	
 	@Column(name = "question")
 	private String question;
@@ -40,14 +40,14 @@ public class Content {
     /**
      * @return String return the idService
      */
-    public String getIdService() {
+    public long getIdService() {
         return idService;
     }
 
     /**
      * @param idService the idService to set
      */
-    public void setIdService(String idService) {
+    public void setIdService(long idService) {
         this.idService = idService;
     }
 
