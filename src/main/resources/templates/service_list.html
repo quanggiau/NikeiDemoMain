@@ -16,10 +16,7 @@
 	<div class="container my-2">
 	<h2 style="text-align: center">Service Master</h2>
 	<form th:action="@{/search}" method="get">
-
 		<table>
-			<th>
-			</th>
 			<tr>
 				<td>
 					<label>Title</label>
@@ -61,7 +58,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="2"><button type="submit" class="btn btn-info  btn-sm mb-3" style="text-align: center;" >Search</button></td>
+				<td colspan="2"><button type="submit" class="btn btn-info  btn-sm mb-3" style="text-align: center;">Search</button></td>
 			</tr>
 		</table>
 	</form>
@@ -79,18 +76,14 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr th:each="content : ${ListContent}">
-					<td th:text="${content.id}"></td>
-					<td th:text="${content.title}"></td>
-					<td th:text="${content.major}"></td>
-					<td th:text="${content.createBy}"></td>
-					<td th:text="${content.createAt}"></td>
+				<tr th:each="service : ${ListService}">
+					<td th:text="${service.id}"></td>
+					<td th:text="${service.title}"></td>
+					<td th:text="${service.major}"></td>
+					<td th:text="${service.createBy}"></td>
+					<td th:text="${service.createAt}"></td>
 				</tr>
 			</tbody>
 		</table>
-
-		
-		</div>
-		</div>
 </body>
 </html>

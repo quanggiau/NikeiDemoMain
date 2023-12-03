@@ -25,19 +25,18 @@ public class ServiceITController {
     @GetMapping("/")
 	public String serviceList(Model model) {
         List<ServiceIT> serviceList = serviceITService.getAllServices();
-        System.out.println(serviceList);
-        serviceList.stream()
-                .forEach(service -> {
-                    System.out.println("ID: " + service.getAnswer());
-                    System.out.println("Title: " + service.getQuestion());
-                    System.out.println("Major: " + service.getAnswer());
-                    System.out.println("CreatteBy: " + service.getCreateAt());
-                    System.out.println("CreatteAt: " + service.getCreateBy());
-                    System.out.println("--------------");
-                });
-		model.addAttribute("ListContent", serviceList);
+        // System.out.println(serviceList);
+        // serviceList.stream()
+        //         .forEach(service -> {
+        //             System.out.println("ID: " + service.getAnswer());
+        //             System.out.println("Title: " + service.getQuestion());
+        //             System.out.println("Major: " + service.getAnswer());
+        //             System.out.println("CreatteBy: " + service.getCreateAt());
+        //             System.out.println("CreatteAt: " + service.getCreateBy());
+        //             System.out.println("--------------");
+        //         });
+		model.addAttribute("ListService", serviceList);
 		return "service_list";
-        //ListService
 	}
 
     @GetMapping("/newservice")

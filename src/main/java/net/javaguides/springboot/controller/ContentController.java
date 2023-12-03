@@ -31,7 +31,7 @@ public class ContentController {
 		List<Content> content = contentService.getAllContents();
 		model.addAttribute("ListContent", content);
 		//return "redirect:/";
-		return "index";
+		return "index_detail";
 	}
 
 	@GetMapping("/showNewContentForm")
