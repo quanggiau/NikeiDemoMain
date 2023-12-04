@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import net.javaguides.springboot.model.Content;
 import net.javaguides.springboot.repository.ServiceMasterRepository;
 import net.javaguides.springboot.service.ContentService;
@@ -43,7 +44,7 @@ public class ContentController {
 	// @PostMapping("/saveContent")
 	@RequestMapping(value="/saveContent", method=RequestMethod.POST, params="saveContent")
 	public String saveContent(@ModelAttribute("content") Content content) {
-		// save content to database 
+		// save content to database
 		String ct = content.getQuestion();
 		String[] splCT = ct.split(",");
 		String[] splAn = content.getAnswer().split(",");
@@ -71,7 +72,7 @@ public class ContentController {
 
 		@PostMapping("/editContent")
 		public String editContent(@ModelAttribute Content content) {
-		// save content to database 
+		// save content to database
 		contentService.updateContent(content);
 		
 		return "redirect:/servicemaster/all";
@@ -80,7 +81,7 @@ public class ContentController {
 	
 	@RequestMapping(value="/saveContent", method=RequestMethod.POST, params="saveAndcallGPT")
 	public String saveAndcallGPT(@ModelAttribute("content") Content content) {
-		// 1. save content to database 
+		// 1. save content to database
 		String ct = content.getQuestion();
 		String[] splCT = ct.split(",");
 		String[] splAn = content.getAnswer().split(",");
