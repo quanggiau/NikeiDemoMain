@@ -11,11 +11,8 @@
 <body>
 	<div class="container">
 		<h1>Nikkei Demo</h1>
-		<hr>
-		<h2>Save Content</h2>
 
-		<form action="#" th:action="@{/content/saveContent}" th:object="${content}"
-			method="POST">
+		<form action="#" th:action="@{/content/saveContent}" th:object="${content}" method="POST">
 
 				<label>Choose Service</label>
 				<select class="form-control selectpicker" th:field="*{idService}" id="idService">
@@ -26,14 +23,12 @@
 				</select>
 
 				<label>Question</label>
-				<input type="text" th:field="*{question}"
-				placeholder="Content question" class="form-control mb-4 col-4">
+				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
 				
 				<label>Answer</label>
-				<input type="text" th:field="*{answer}"
-				placeholder="Content answer" class="form-control mb-4 col-4">
+				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4">
 				
-				<button type="submit" class="btn btn-info col-2"> Save Content</button>
+				<button type="submit" class="btn btn-info col-2">Save Content</button>
 		</form>
 		
 		<hr>

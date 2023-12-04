@@ -60,7 +60,7 @@ public class ContentController {
 
 	@PostMapping("/saveContent")
 	public String saveContent(@ModelAttribute("content") Content content) {
-		// save employee to database
+		// save content to database
 		contentService.saveContent(content);
 		return "redirect:/servicemaster/all";
 	}
