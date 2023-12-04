@@ -60,8 +60,19 @@ public class ContentController {
 
 	@PostMapping("/saveContent")
 	public String saveContent(@ModelAttribute("content") Content content) {
-		// save content to database
-		contentService.saveContent(content);
+		// save content to database 
+		String ct = content.getQuestion();
+		String[] splCT = ct.split(",");
+		String[] splAn = content.getAnswer().split(",");
+		for(int i = 0; i<=splCT.length-1; i++)
+		{
+			Content conDB = new Content();
+			conDB.setAnswer(splAn[i]);
+			conDB.setIdService(content.getIdService());
+			conDB.setQuestion(splCT[i]);
+			contentService.saveContent(conDB);
+		}
+		
 		return "redirect:/servicemaster/all";
 	}
 
