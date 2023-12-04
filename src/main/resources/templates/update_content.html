@@ -27,31 +27,36 @@
 <body>
 	<div class="container">
 		<h1>Nikkei Demo</h1>
-
-		<form action="#" th:action="@{/content/saveContent}" th:object="${content}" method="POST">
-
-				<label>Choose Service</label>
-				<select class="form-control selectpicker">
-					<option 
-							th:value="${serviceMT.id}"
-							th:text="${serviceMT.title}">
-					</option>
-				</select>
-				
-				<div th:each="obj, iterStat : ${contentItem}"></tr>
+		
+		<label>Choose Service</label>
+		<select class="form-control selectpicker">
+			<option 
+					th:value="${serviceMT.id}"
+					th:text="${serviceMT.title}">
+			</option>
+		</select>
+		<th:block th:each="obj, iterStat : ${contentItem}">
+		<form th:name="frmEdit" action="#" th:action="@{/content/editContent}" method="POST">
 				<!-- row 1 -->
+					<input style="display: none;" th:name="id" th:value="${obj.id}"/>
+					<input style="display: none;" th:name="idService" th:value="${obj.idService}"/>
 					<label th:text="'Question ' + ${iterStat.index + 1} + ' : '" ></label>
-					<input type="text" th:value="${obj.question}" class="form-control mb-4 col-4">
-					<label>Answer :</label>
-					<input type="text" th:value="${obj.answer}" class="form-control mb-4 col-4"><br>
-				</div>
-				
-				<button type="submit" class="btn btn-info col-2">Save Content</button>
+					<input th:name="question" type="text" th:value="${obj.question}" class="form-control mb-4 col-4">
+					<label th:text="'Answer ' + ${iterStat.index + 1} + ' : '" ></label>
+					<input type="text" th:name="answer" th:value="${obj.answer}" class="form-control mb-4 col-4"><br>
+					<button type="submit" class="btn btn-info col-2">Save Content</button>
 		</form>
+		</th:block>
+	
 		
 		<hr>
 		
 		<a th:href = "@{/servicemaster/all}"> Back to Service Master</a>
 	</div>
 </body>
+<script th:inline="javascript">
+	function myFunction() {
+	  document.frmEdit.submit();
+	}
+	</script>
 </html>
