@@ -4,15 +4,19 @@ package net.javaguides.springboot.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import net.javaguides.springboot.model.Content;
-import net.javaguides.springboot.model.ServiceMaster;
+import net.javaguides.springboot.model.Employee;
+import net.javaguides.springboot.repository.ServiceMasterRepository;
 import net.javaguides.springboot.service.ContentService;
 import net.javaguides.springboot.service.ServiceMasterSRV;
 
@@ -26,29 +30,10 @@ public class ContentController {
 	@Autowired
 	private ServiceMasterSRV serviceMTService;
 
-	// @GetMapping("/all")
-	// public ResponseEntity getall() {
-	// 	return content = contentService.getAllContents();
+	@Autowired
+	private ServiceMasterRepository repoMT;
 
-	// }
-
-
-
-
-	// @GetMapping("/")
-	// public String viewHomePage(Model model) {
-	// 	return "redirect:/content/all";
-	// }
 	
-
-	// @GetMapping("/all")
-	// public String getall(Model model) {
-	// 	List<Content> content = contentService.getAllContents();
-	// 	model.addAttribute("ListContent", content);
-	// 	//return "redirect:/";
-	// 	return "index_detail";
-	// }
-
 	@GetMapping("/showNewContentForm")
 	public String showNewContentForm(Model model) {
 		// create model attribute to bind form data
@@ -74,6 +59,32 @@ public class ContentController {
 		}
 		
 		return "redirect:/servicemaster/all";
+	}
+
+	// @GetMapping("/showFormForUpdate")
+	// public String showFormForUpdate(@RequestParam long id, Model model) {
+
+	// 	List<Content> content = contentService.getContentByIdService(id);
+	// 	model.addAttribute("content", content);
+
+	// 	//model.addAttribute("serviceMasterList", serviceMTService.getAllService());
+		
+	// 	// get employee from the service
+	// 	// Employee employee = employeeService.getEmployeeById(id);
+		
+	// 	// // set employee as a model attribute to pre-populate the form
+	// 	// model.addAttribute("employee", employee);
+	// 	return "update_content";
+	// }
+
+	@GetMapping("/showFormForUpdate")
+	public String showFormForUpdate(@RequestParam long id,Model model) {
+		// create model attribute to bind form data
+		List<Content> contentDContents = contentService.getContentByIdService(id);
+		model.addAttribute("content", model);
+		model.addAttribute("contentItem", contentDContents);
+		model.addAttribute("serviceMT", repoMT.getReferenceById(id) );
+		return "update_content";
 	}
 
 }

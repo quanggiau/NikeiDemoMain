@@ -40,4 +40,11 @@ public class ContentServiceImpl implements ContentService{
         return contentRepository.save(content);
 
     }
+
+    @Override
+    public List<Content> getContentByIdService(Long id) {
+       return contentRepository.getContentByIdService(id);
+    }
+
+    
 }

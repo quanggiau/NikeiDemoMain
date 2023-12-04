@@ -8,4 +8,5 @@ public interface ContentService {
 	void saveContent(Content content);
 	Content getContentById(long id);
     Content updateContent(Content content);
+    List<Content> getContentByIdService(Long id);
 }
