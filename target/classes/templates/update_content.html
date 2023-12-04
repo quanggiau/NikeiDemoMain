@@ -38,9 +38,9 @@
 					</option>
 				</select>
 				
-				<div th:each="obj : ${contentItem}"></tr>
+				<div th:each="obj, iterStat : ${contentItem}"></tr>
 				<!-- row 1 -->
-					<label>Question : </label>
+					<label th:text="'Question ' + ${iterStat.index + 1} + ' : '" ></label>
 					<input type="text" th:value="${obj.question}" class="form-control mb-4 col-4">
 					<label>Answer :</label>
 					<input type="text" th:value="${obj.answer}" class="form-control mb-4 col-4"><br>
