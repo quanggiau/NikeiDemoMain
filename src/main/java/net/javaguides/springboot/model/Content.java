@@ -21,8 +21,6 @@ public class Content {
 	@Column(name = "answer")
 	private String answer;
 
-    
-
     /**
      * @return long return the id
      */

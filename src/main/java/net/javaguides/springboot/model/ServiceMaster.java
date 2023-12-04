@@ -9,13 +9,12 @@ import jakarta.persistence.Id;
 @Entity
 public class ServiceMaster {
     @Id
-	@GeneratedValue(strategy =  GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 	
     @Column(name = "title")
 	private String title;
 	
-
     @Column(name = "major")
 	private String major;
 

@@ -18,7 +18,5 @@ public class ServiceMasterServiceImpl implements ServiceMasterSRV{
     public List<ServiceMaster> getAllService() {
         return serviceMTRepository.findAll();
          
-    }
-
-    
+    } 
 }
