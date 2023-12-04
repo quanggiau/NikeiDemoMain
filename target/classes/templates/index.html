@@ -87,20 +87,6 @@
 					<td th:text="${obj.createBy}"></td>
 					<td th:text="${obj.createAt}"></td>
 				</tr>
-
-				<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-					Launch simple modal
-				</button>
-				<th:block th:replace="_modals :: modal('exampleModal')">modal</th:block>
-
-				<script>
-					$('#exampleModal1').on('show.bs.modal', function () {
-						$.get("/modals/modal1", function (data) {
-							$('#exampleModal1').find('.modal-body').html(data);
-						})
-					});
-				
-				</script>
 			</tbody>
 		</table>
 		</div>

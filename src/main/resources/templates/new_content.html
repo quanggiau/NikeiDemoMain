@@ -16,21 +16,29 @@
 
 		<form action="#" th:action="@{/content/saveContent}" th:object="${content}"
 			method="POST">
-			<input type="number" th:field="*{idService}"
-				placeholder="idService" class="form-control mb-4 col-4">
-				
-				<input type="text" th:field="*{answer}"
-				placeholder="Content answer" class="form-control mb-4 col-4">
-				
+
+				<label>Choose Service</label>
+				<select class="form-control selectpicker" th:field="*{idService}" id="idService">
+					<option th:each="obj : ${serviceMasterList}"
+							th:value="${obj.id}"
+							th:text="${obj.title}">
+					</option>
+				</select>
+
+				<label>Question</label>
 				<input type="text" th:field="*{question}"
 				placeholder="Content question" class="form-control mb-4 col-4">
 				
-				<button type="submit" class="btn btn-info col-2"> Save Employee</button>
+				<label>Answer</label>
+				<input type="text" th:field="*{answer}"
+				placeholder="Content answer" class="form-control mb-4 col-4">
+				
+				<button type="submit" class="btn btn-info col-2"> Save Content</button>
 		</form>
 		
 		<hr>
 		
-		<a th:href = "@{/content/all}"> Back to Content List</a>
+		<a th:href = "@{/servicemaster/all}"> Back to Service Master</a>
 	</div>
 </body>
 </html>
