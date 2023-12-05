@@ -1,5 +1,4 @@
 package net.javaguides.springboot.dto.gpt;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,5 +9,4 @@ import lombok.NoArgsConstructor;
 public class Message {
     private String role;
     private String content;
-
 }

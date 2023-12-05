@@ -1,6 +1,5 @@
 package net.javaguides.springboot.dto.gpt;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import lombok.AllArgsConstructor;
@@ -16,5 +15,6 @@ public class ChatRequest {
     private int n;
     private double temperature;
     private int max_tokens;
+    private String stop;
 
 }
