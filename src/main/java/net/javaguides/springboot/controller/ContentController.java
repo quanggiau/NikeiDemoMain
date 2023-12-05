@@ -40,7 +40,7 @@ public class ContentController {
   private RestTemplate restTemplate;
 
 	@Value("${openai.chatgtp.model}")
-	private String model;
+	private String modelGPT;
 
 	@Value("${openai.chatgtp.max-completions}")
 	private int maxCompletions;
@@ -106,30 +106,41 @@ public class ContentController {
 
 	
 	@RequestMapping(value="/saveContent", method=RequestMethod.POST, params="saveAndcallGPT")
-	public String saveAndcallGPT(@ModelAttribute("content") Content content) {
+	public String saveAndcallGPT(@ModelAttribute("content") Content content, Model model) {
 		// 1. save content to database
 		String ct = content.getQuestion();
 		String[] splCT = ct.split(",");
 		String[] splAn = content.getAnswer().split(",");
+		String prompt = "あなたはプレスリリースを作る業界No.1のプロです。\\n" + //
+				"以下の質問と回答をもとに最高のプレスリリースを5つ提案してください。\\n" + //
+				"それぞれのプレスリリースはタイトルと文章のセットで作ってください。\\n" + //
+				"文章は100文字以内で作ってください。\\n" + //
+				"";
 		for(int i = 0; i<=splCT.length-1; i++)
 		{
 			Content conDB = new Content();
 			conDB.setAnswer(splAn[i]);
 			conDB.setIdService(content.getIdService());
 			conDB.setQuestion(splCT[i]);
+			prompt = prompt + "質問" + (i+1) + ".\\n" + //
+					" " + splCT[i] + " \n" + "回答" + (i+1) + ".\\\\n" + //
+							"" + splAn[i] + " \n";
 			contentService.saveContent(conDB);
 		}
 
-		// 2. call API
-		String prompt = "あなたはプレスリリースを作る業界No.1のプロです。\n以下の質問と回答をもとに最高のプレスリリースを5つ提案してください。\nそれぞれのプレスリリースはタイトルと文章のセットで作ってください。\n文章は100文字以内で作ってください。\n質問1.\n ターゲットは誰か？\n(年齢層、性別、職業、趣味など、ターゲットとする顧客の詳細)\n回答1. ターゲットはエンジニアです。20代～30代のエンジニアをターゲットとしており、今後のキャリアに不安などを抱いている人をターゲットとしています。\n質問2.\n製品またはサービスの主要な特徴は何か。\n(製品やサービスが提供する主要な利点や機能)\n回答2. このサービスはWEB上でエンジニアの技術スキルや経歴を入力すると適切な転職先の会社を探してくれるサービスです。\n質問3. 競合他社との差別化ポイントは何か？\n回答3. エンジニアのスキル・経歴から最適な会社をAIが自動でマッチングさせることです。トライアルでこのサービスを運用したところ、マッチング精度は90%以上でした。\n質問4. 顧客が抱える問題やニーズは何か？\n回答4. 顧客は自分のスキルや経歴が市場で求められるものなのか、非常に不安になっています。また、転職市場における会社が多すぎて、自分で会社を探すのが困難です。\n質問5. 製品やサービスが顧客に提供する解決策は何か？\n(顧客の問題をどのように解決するか)\n回答5. エンジニアのスキル・経歴から最適な会社をAIが自動でマッチングさせることで、顧客の市場価値を見える化するとともに、転職先の会社を探す負荷を下げます。\n質問6. 顧客に伝えたいブランドイメージは何か？\n回答6. 信頼と安心です。";
-      	ChatRequest request = new ChatRequest(model,
+		// 2. call API 
+      	ChatRequest request = new ChatRequest(modelGPT,
               List.of(new Message("assistant", prompt)),
               maxCompletions,
               temperature,
               maxTokens,
               stop);
 		ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
-		return "redirect:/servicemaster/all";
+		String re = response.getChoices().get(0).getMessage().getContent();
+		System.out.println(re);
+
+		model.addAttribute("resultFromGPT", re);
+		return "result";
  	}
 
 }
