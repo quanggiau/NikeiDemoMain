@@ -12,19 +12,35 @@
 	crossorigin="anonymous">
 <style>
 	.form-control {
-    display: inline;
-    width: 100%;
-    height: calc(2.25rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
-}
+		display: inline;
+		width: 100%;
+		height: calc(2.25rem + 2px);
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		line-height: 1.5;
+		color: #495057;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
+		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+	}
+	label {
+		display: inline-block;
+		margin-bottom: 0.5rem;
+		margin-right: 8.5px;
+		margin-left: 20px;
+	}
+	input {
+		width: 430px;
+		height: 45px;
+		padding: 6px;
+		border: 1px solid #ccc;
+		border-radius: 0px;
+		box-sizing: border-box;
+	}
+
+
 </style>
 </head>
 <body>
@@ -43,20 +59,21 @@
 					<!-- row 1 -->
 						<input style="display: none;" th:name="id" th:value="${obj.id}" class="form3"/>
 						<input style="display: none;" th:name="idService" th:value="${obj.idService}"/>
-						<label th:text="'Question ' + ${iterStat.index + 1} + ' : '" ></label>
+						<label th:text="'Question ' + ${iterStat.index + 1} + ' : '"></label>
 						<input th:name="question" type="text" th:value="${obj.question}" class="form1">
 						<label th:text="'Answer ' + ${iterStat.index + 1} + ' : '" ></label>
 						<input type="text" th:name="answer" th:value="${obj.answer}" class="form2"><br>
 					
 			</form>
 		</th:block>
-		<button type="button" th:onclick="submitSave();" class="btn btn-info col-2">Save Content</button>
-		<button type="submit" name="saveAndcallGPT" value="saveAndcallGPT">Call GPT</button>
+		<button type="button" th:onclick="submitSave();" class="btn btn-info col-1"> Save </button>
+		<button type="submit" name="saveAndcallGPT" value="saveAndcallGPT" class="btn btn-info col-1"> Call GPT </button>
 		<hr>
 		
 		<a th:href = "@{/servicemaster/all}"> Back to Service Master</a>
 	</div>
 </body>
+
 <script th:inline="javascript">
 	function submitSave()
 	{
