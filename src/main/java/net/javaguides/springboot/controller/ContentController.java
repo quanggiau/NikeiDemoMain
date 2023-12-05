@@ -67,7 +67,7 @@ public class ContentController {
 		return "new_content";
 	}
 
-	// Update content
+	// Create content - form create, button Save
 	@RequestMapping(value="/saveContent", method=RequestMethod.POST, params="saveContent")
 	public String saveContent(@ModelAttribute("content") Content content) {
 		// save content to database
@@ -82,8 +82,7 @@ public class ContentController {
 			conDB.setQuestion(splCT[i]);
 			contentService.saveContent(conDB);
 		}
-		// reload page at html
-		return "";
+		return "redirect:/servicemaster/all";
 	}
 
 	@GetMapping("/showFormForUpdate")
@@ -96,7 +95,7 @@ public class ContentController {
 		return "update_content";
 	}
 
-		// Update form
+		// Update form content - button save
 		@PostMapping("/editContent")
 		public String editContent(@RequestBody DataFromAjax dt) {
 			for(int i = 0; i<=dt.getRs().length-1; i++)
@@ -108,9 +107,11 @@ public class ContentController {
 				conDB.setQuestion(dt.getRs()[i]);
 				contentService.saveContent(conDB);
 			}
+			// reload page at html
 			return "redirect:/servicemaster/all";
 		}
 
+	// at Page create
 	@RequestMapping(value="/saveContent", method=RequestMethod.POST, params="saveAndcallGPT")
 	public String saveAndcallGPT(@ModelAttribute("content") Content content, Model model) {
 		// 1. save content to database

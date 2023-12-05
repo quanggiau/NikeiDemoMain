@@ -9,18 +9,18 @@
 	crossorigin="anonymous">
 <style>
 	.form-control {
-    display: inline;
-    width: 100%;
-    height: calc(2.25rem + 2px);
-    padding: 0.375rem 0.75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    color: #495057;
-    background-color: #fff;
-    background-clip: padding-box;
-    border: 1px solid #ced4da;
-    border-radius: 0.25rem;
-    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+		display: inline;
+		width: 100%;
+		height: calc(2.25rem + 2px);
+		padding: 0.375rem 0.75rem;
+		font-size: 1rem;
+		line-height: 1.5;
+		color: #495057;
+		background-color: #fff;
+		background-clip: padding-box;
+		border: 1px solid #ced4da;
+		border-radius: 0.25rem;
+		transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 </style>
 </head>
@@ -68,48 +68,70 @@
 				<label>Answer 5:</label>
 				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
 
-				<!-- row 5 -->
+				<!-- row 6 -->
 				<label>Question 6:</label>
 				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
 				<label>Answer 6:</label>
 				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
 
-				<!-- row 5 -->
+				<!-- row 7 -->
 				<label>Question 7:</label>
 				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
 				<label>Answer 7:</label>
 				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
 
-				<!-- row 5 -->
+				<!-- row 8 -->
 				<label>Question 8:</label>
 				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
 				<label>Answer 8:</label>
 				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
 
-				<!-- row 5 -->
+				<!-- row 9 -->
 				<label>Question 9:</label>
 				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
 				<label>Answer 9:</label>
 				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
 
-				<!-- row 5 -->
+				<!-- row 10 -->
 				<label>Question 10:</label>
 				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
 				<label>Answer 10:</label>
 				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
 
-				<!-- row 5 -->
+				<!-- row 11 -->
 				<label>Question 11:</label>
 				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
 				<label>Answer 11:</label>
 				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
+
+				<!-- row 12 -->
+				<label>Question 12:</label>
+				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
+				<label>Answer 12:</label>
+				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
+
+				<!-- row 13 -->
+				<label>Question 13:</label>
+				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
+				<label>Answer 13:</label>
+				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
+
+				<!-- row 14 -->
+				<label>Question 14:</label>
+				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
+				<label>Answer 14:</label>
+				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
+
+				<!-- row 15 -->
+				<label>Question 15:</label>
+				<input type="text" th:field="*{question}" placeholder="Content question" class="form-control mb-4 col-4">
+				<label>Answer 15:</label>
+				<input type="text" th:field="*{answer}" placeholder="Content answer" class="form-control mb-4 col-4"><br>
 				
-				<button type="submit" name="saveContent" value="saveContent" class="btn btn-info col-2">Save Content</button>
-				<button type="submit" name="saveAndcallGPT" value="saveAndcallGPT">Call GPT</button>
+				<button type="submit" name="saveContent" value="saveContent" class="btn btn-info col-1"> Save </button>
+				<button type="submit" name="saveAndcallGPT" value="saveAndcallGPT" class="btn btn-info col-1">Call GPT</button>
 		</form>
-		
 		<hr>
-		
 		<a th:href = "@{/servicemaster/all}"> Back to Service Master</a>
 	</div>
 </body>
