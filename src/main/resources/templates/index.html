@@ -81,7 +81,7 @@
 			<tbody>
 				<tr th:each="obj : ${serviceMasterList}">
 					<td th:text="${obj.id}"></td>
-					<td><a th:href="@{/content/showFormForUpdate?id=1}" th:text="${obj.title}"></a></td>
+					<td><a th:href="@{'/content/showFormForUpdate?id=' + ${obj.id}}" th:text="${obj.title}"></a></td>
 					<td th:text="${obj.major}"></td>
 					<td th:text="${obj.createBy}"></td>
 					<td th:text="${obj.createAt}"></td>

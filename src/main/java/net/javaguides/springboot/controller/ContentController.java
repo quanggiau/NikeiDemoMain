@@ -87,7 +87,7 @@ public class ContentController {
 	}
 
 	@GetMapping("/showFormForUpdate")
-	public String showFormForUpdate(@RequestParam long id,Model model) {
+	public String showFormForUpdate(@RequestParam long id, Model model) {
 		// create model attribute to bind form data
 		List<Content> contentDContents = contentService.getContentByIdService(id);
 		model.addAttribute("content", model);
