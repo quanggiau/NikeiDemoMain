@@ -1,6 +1,5 @@
 package net.javaguides.springboot.controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +37,7 @@ public class ContentController {
 	private ServiceMasterRepository repoMT;
 
 	@Autowired
-  	private RestTemplate restTemplate;
+	private RestTemplate restTemplate;
 
 	@Value("${openai.chatgtp.model}")
 	private String modelGPT;
@@ -59,9 +58,9 @@ public class ContentController {
 	private String stop;
 
 	
+	// Form create
 	@GetMapping("/showNewContentForm")
 	public String showNewContentForm(Model model) {
-		// create model attribute to bind form data
 		Content content = new Content();
 		model.addAttribute("content", content);
 		model.addAttribute("serviceMasterList", serviceMTService.getAllService());
@@ -83,8 +82,8 @@ public class ContentController {
 			conDB.setQuestion(splCT[i]);
 			contentService.saveContent(conDB);
 		}
-		
-		return "redirect:/servicemaster/all";
+		// reload page at html
+		return "";
 	}
 
 	@GetMapping("/showFormForUpdate")

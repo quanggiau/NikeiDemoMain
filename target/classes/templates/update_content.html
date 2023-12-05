@@ -33,7 +33,7 @@
 		
 		<label>Choose Service</label>
 		<select class="form-control selectpicker">
-			<option 
+			<option
 					th:value="${serviceMT.id}"
 					th:text="${serviceMT.title}">
 			</option>
@@ -62,21 +62,21 @@
 	{
 		var l = $('.form1').length;
 		var result = [];
-		for (i = 0; i < l; i++) { 
+		for (i = 0; i < l; i++) {
 			result.push($('.form1').eq(i).val());
 		}
 		//console.log(result);
 
 		var t = $('.form2').length;
 		var result2 = [];
-		for (i = 0; i < t; i++) { 
+		for (i = 0; i < t; i++) {
 			result2.push($('.form2').eq(i).val());
 		}
 		//console.log(result2);
 
 		var x = $('.form3').length;
 		var result3 = [];
-		for (i = 0; i < x; i++) { 
+		for (i = 0; i < x; i++) {
 			result3.push($('.form3').eq(i).val());
 		}
 		//console.log(result3);
@@ -86,29 +86,22 @@
 		info[1] = result;
 		info[2] = result2;
 
-		console.log(info);
-
-		var dtfinal = JSON.stringify({ 
-                 'rs3': result3,
-                 'rs':result,
-				 'rs2':result2
-               });
+		var dtfinal = JSON.stringify({
+			'rs3': result3,
+			'rs':result,
+			'rs2':result2
+			});
 
 		$.ajax({
 					type: 'post',
 					url: "/content/editContent",
 					data: dtfinal,
-					//dataType:'json',
 					contentType:'application/json',
 					success: function(returnedData){
-						//window.location.href = "/servicemaster/all";
-						window.location.pathname = "@{/servicemaster/all}"
-					},    
-
+						window.location.href = "http://localhost:8080/servicemaster/all";
+					},
 					error: function(xhr, exception) {
-						alert("errr");
-						alert(xhr);
-						alert(exception);
+						console.log("Err update Content", exception)
 					}
 				});
 	}
