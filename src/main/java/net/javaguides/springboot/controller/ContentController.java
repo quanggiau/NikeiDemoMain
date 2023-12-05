@@ -38,7 +38,7 @@ public class ContentController {
 	private ServiceMasterRepository repoMT;
 
 	@Autowired
-  private RestTemplate restTemplate;
+  	private RestTemplate restTemplate;
 
 	@Value("${openai.chatgtp.model}")
 	private String modelGPT;
@@ -129,27 +129,28 @@ public class ContentController {
 			conDB.setAnswer(splAn[i]);
 			conDB.setIdService(content.getIdService());
 			conDB.setQuestion(splCT[i]);
-			prompt = prompt 
+			prompt = prompt
 					+ "質問" + (i+1) + ".\\n" + //
-					" " + splCT[i] + " \n" 
+					" " + splCT[i] + " \n"
 					+ "回答" + (i+1) + ".\\\\n" + //
 					" " + splAn[i] + " \n";
 			contentService.saveContent(conDB);
 		}
 
-		// 2. call API 
-      	ChatRequest request = new ChatRequest(modelGPT,
-              List.of(new Message("assistant", prompt)),
-              maxCompletions,
-              temperature,
-              maxTokens,
-              stop);
+		// 2. call API
+		ChatRequest request = new ChatRequest(modelGPT,
+			List.of(new Message("assistant", prompt)),
+			maxCompletions,
+			temperature,
+			maxTokens,
+			stop);
 		ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
-		String re = response.getChoices().get(0).getMessage().getContent();
-		System.out.println(re);
+		if (response != null) {
+			String re = response.getChoices().get(0).getMessage().getContent();
+			System.out.println(re);
+			model.addAttribute("resultFromGPT", re);
+		}
 
-		model.addAttribute("resultFromGPT", re);
 		return "result";
- 	}
-
+	}
 }
