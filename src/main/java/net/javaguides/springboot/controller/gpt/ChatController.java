@@ -1,45 +1,50 @@
 package net.javaguides.springboot.controller.gpt;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import net.javaguides.springboot.dto.gpt.ChatRequest;
 import net.javaguides.springboot.dto.gpt.ChatResponse;
+import net.javaguides.springboot.dto.gpt.Message;
 
 @RestController
-@RequestMapping("/api/v1")
+//@RequestMapping("/api/v1")
 public class ChatController {
 
-    @Value("${openai.model}")
-    private String model;
-    
-    @Value("${openai.api.url}")
-    private String apiUrl;
+  @Autowired
+  private RestTemplate restTemplate;
 
-     @Value("${chatgpt.api.key}")
-    private String apiKey;
+  @Value("${openai.chatgtp.model}")
+  private String model;
 
-    private static RestTemplate restTemplate = new RestTemplate();
+  @Value("${openai.chatgtp.max-completions}")
+  private int maxCompletions;
 
-    
-    @RequestMapping(value = "/ask", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String ask(@RequestParam String prompt) {
-        // create a request
-        ChatRequest request = new ChatRequest(model, prompt);
-        
-        // call the API
-        ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
-        
-        if (response == null || response.getChoices() == null || response.getChoices().isEmpty()) {
-            return "No response";
-        }
-        
-        // return the first response
-        return response.getChoices().get(0).getMessage().getContent();
-    }
+  @Value("${openai.chatgtp.temperature}")
+  private double temperature;
+
+  @Value("${openai.chatgtp.max_tokens}")
+  private int maxTokens;
+
+  @Value("${openai.chatgtp.api.url}")
+  private String apiUrl;
+
+  @PostMapping("/chat")
+  public ChatResponse chat(@RequestParam("prompt") String prompt) {
+
+      ChatRequest request = new ChatRequest(model,
+              List.of(new Message("user", prompt)),
+              maxCompletions,
+              temperature,
+              maxTokens);
+
+      ChatResponse response = restTemplate.postForObject(apiUrl, request, ChatResponse.class);
+      return response;
+  }
 }
