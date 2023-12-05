@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
+	<script src="http://code.jquery.com/jquery-1.10.2.js">
+
+	</script>
 <meta charset="ISO-8859-1">
 <title>Nikkei Demo</title>
 <link rel="stylesheet"
@@ -36,26 +39,77 @@
 			</option>
 		</select>
 		<th:block th:each="obj, iterStat : ${contentItem}">
-			<form th:name="frmEdit" action="#" th:action="@{/content/editContent}" method="POST">
+			<form th:name="frmEdit"  th:id="myform">
 					<!-- row 1 -->
-						<input style="display: none;" th:name="id" th:value="${obj.id}"/>
+						<input style="display: none;" th:name="id" th:value="${obj.id}" class="form3"/>
 						<input style="display: none;" th:name="idService" th:value="${obj.idService}"/>
 						<label th:text="'Question ' + ${iterStat.index + 1} + ' : '" ></label>
-						<input th:name="question" type="text" th:value="${obj.question}" class="form-control mb-4 col-4">
+						<input th:name="question" type="text" th:value="${obj.question}" class="form1">
 						<label th:text="'Answer ' + ${iterStat.index + 1} + ' : '" ></label>
-						<input type="text" th:name="answer" th:value="${obj.answer}" class="form-control mb-4 col-4"><br>
+						<input type="text" th:name="answer" th:value="${obj.answer}" class="form2"><br>
 					
 			</form>
 		</th:block>
-		<button type="submit" class="btn btn-info col-2">Save Content</button>
+		<button type="button" th:onclick="submitSave();" class="btn btn-info col-2">Save Content</button>
+		<button type="submit" name="saveAndcallGPT" value="saveAndcallGPT">Call GPT</button>
 		<hr>
 		
 		<a th:href = "@{/servicemaster/all}"> Back to Service Master</a>
 	</div>
 </body>
 <script th:inline="javascript">
-	function myFunction() {
-	  document.frmEdit.submit();
+	function submitSave()
+	{
+		var l = $('.form1').length;
+		var result = [];
+		for (i = 0; i < l; i++) { 
+			result.push($('.form1').eq(i).val());
+		}
+		//console.log(result);
+
+		var t = $('.form2').length;
+		var result2 = [];
+		for (i = 0; i < t; i++) { 
+			result2.push($('.form2').eq(i).val());
+		}
+		//console.log(result2);
+
+		var x = $('.form3').length;
+		var result3 = [];
+		for (i = 0; i < x; i++) { 
+			result3.push($('.form3').eq(i).val());
+		}
+		//console.log(result3);
+
+		var info = [];
+		info[0] = result3;
+		info[1] = result;
+		info[2] = result2;
+
+		console.log(info);
+
+		var dtfinal = JSON.stringify({ 
+                 'rs3': result3,
+                 'rs':result,
+				 'rs2':result2
+               });
+
+		$.ajax({
+					type: 'post',
+						url: "/content/editContent",
+						data: dtfinal,
+						dataType:'json',
+              			contentType:'application/json',
+						success: function(returnedData){
+							console.log("Success"); 
+							alert("success")
+						},    
+	
+						error: function(xhr, exception) {
+							console.log(exception);
+							}
+				});
 	}
-	</script>
+
+</script>
 </html>

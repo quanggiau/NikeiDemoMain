@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.client.RestTemplate;
 
 import net.javaguides.springboot.dto.gpt.ChatRequest;
 import net.javaguides.springboot.dto.gpt.ChatResponse;
+import net.javaguides.springboot.dto.gpt.DataFromAjax;
 import net.javaguides.springboot.dto.gpt.Message;
 import net.javaguides.springboot.model.Content;
 import net.javaguides.springboot.repository.ServiceMasterRepository;
@@ -97,14 +99,27 @@ public class ContentController {
 	}
 
 		@PostMapping("/editContent")
-		public String editContent(@ModelAttribute Content content) {
+		public String editContent(@RequestBody DataFromAjax dt) {
 		// save content to database
-		contentService.updateContent(content);
+		//contentService.updateContent(content);
+		dt.getRs().
+		//System.out.println(dt);
+
+		// String ct = content.getQuestion();
+		// String[] splCT = ct.split(",");
+		// String[] splAn = content.getAnswer().split(",");
+		// for(int i = 0; i<=splCT.length-1; i++)
+		// {
+		// 	Content conDB = new Content();
+		// 	conDB.setAnswer(splAn[i]);
+		// 	conDB.setIdService(content.getIdService());
+		// 	conDB.setQuestion(splCT[i]);
+		// 	contentService.saveContent(conDB);
+		// }
 		
 		return "redirect:/servicemaster/all";
 	}
 
-	
 	@RequestMapping(value="/saveContent", method=RequestMethod.POST, params="saveAndcallGPT")
 	public String saveAndcallGPT(@ModelAttribute("content") Content content, Model model) {
 		// 1. save content to database
@@ -122,9 +137,11 @@ public class ContentController {
 			conDB.setAnswer(splAn[i]);
 			conDB.setIdService(content.getIdService());
 			conDB.setQuestion(splCT[i]);
-			prompt = prompt + "質問" + (i+1) + ".\\n" + //
-					" " + splCT[i] + " \n" + "回答" + (i+1) + ".\\\\n" + //
-							"" + splAn[i] + " \n";
+			prompt = prompt 
+					+ "質問" + (i+1) + ".\\n" + //
+					" " + splCT[i] + " \n" 
+					+ "回答" + (i+1) + ".\\\\n" + //
+					" " + splAn[i] + " \n";
 			contentService.saveContent(conDB);
 		}
 
