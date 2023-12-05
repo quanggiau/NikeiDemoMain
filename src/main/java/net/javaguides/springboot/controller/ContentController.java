@@ -25,7 +25,6 @@ import net.javaguides.springboot.repository.ServiceMasterRepository;
 import net.javaguides.springboot.service.ContentService;
 import net.javaguides.springboot.service.ServiceMasterSRV;
 
-//@RestController
 @Controller
 @RequestMapping("/content")
 public class ContentController {
@@ -69,7 +68,7 @@ public class ContentController {
 		return "new_content";
 	}
 
-	// @PostMapping("/saveContent")
+	// Update content
 	@RequestMapping(value="/saveContent", method=RequestMethod.POST, params="saveContent")
 	public String saveContent(@ModelAttribute("content") Content content) {
 		// save content to database
@@ -98,27 +97,20 @@ public class ContentController {
 		return "update_content";
 	}
 
+		// Update form
 		@PostMapping("/editContent")
 		public String editContent(@RequestBody DataFromAjax dt) {
-		// save content to database
-		//contentService.updateContent(content);
-		dt.getRs().
-		//System.out.println(dt);
-
-		// String ct = content.getQuestion();
-		// String[] splCT = ct.split(",");
-		// String[] splAn = content.getAnswer().split(",");
-		// for(int i = 0; i<=splCT.length-1; i++)
-		// {
-		// 	Content conDB = new Content();
-		// 	conDB.setAnswer(splAn[i]);
-		// 	conDB.setIdService(content.getIdService());
-		// 	conDB.setQuestion(splCT[i]);
-		// 	contentService.saveContent(conDB);
-		// }
-		
-		return "redirect:/servicemaster/all";
-	}
+			for(int i = 0; i<=dt.getRs().length-1; i++)
+			{
+				Content conDB = new Content();
+				conDB.setAnswer(dt.getRs2()[i]);
+				conDB.setIdService(contentService.getContentById(Long.parseLong(dt.getRs3()[i])).getIdService());
+				conDB.setId(Long.parseLong(dt.getRs3()[i]));
+				conDB.setQuestion(dt.getRs()[i]);
+				contentService.saveContent(conDB);
+			}
+			return "redirect:/servicemaster/all";
+		}
 
 	@RequestMapping(value="/saveContent", method=RequestMethod.POST, params="saveAndcallGPT")
 	public String saveAndcallGPT(@ModelAttribute("content") Content content, Model model) {

@@ -96,18 +96,20 @@
 
 		$.ajax({
 					type: 'post',
-						url: "/content/editContent",
-						data: dtfinal,
-						dataType:'json',
-              			contentType:'application/json',
-						success: function(returnedData){
-							console.log("Success"); 
-							alert("success")
-						},    
-	
-						error: function(xhr, exception) {
-							console.log(exception);
-							}
+					url: "/content/editContent",
+					data: dtfinal,
+					//dataType:'json',
+					contentType:'application/json',
+					success: function(returnedData){
+						//window.location.href = "/servicemaster/all";
+						window.location.pathname = "@{/servicemaster/all}"
+					},    
+
+					error: function(xhr, exception) {
+						alert("errr");
+						alert(xhr);
+						alert(exception);
+					}
 				});
 	}
 
